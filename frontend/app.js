@@ -11,11 +11,12 @@ function render(dinos) {
   const div = document.getElementById("dinos");
   div.innerHTML = "";
   dinos.forEach((d, idx) => {
-    // const choice = Math.floor((Math.random()*images.length) % images.length); 
-    const choice = idx;
-    div.innerHTML += `<div class="card shake ${d.energy <= 0 ? "disabled" : ""}">
+    const choice = Math.floor((Math.random()*images.length) % images.length); 
+    // const choice = idx;
+
+    div.innerHTML += (dinos.length !== 0) ? `<div class="card shake ${d.energy <= 0 ? "disabled" : ""}">
       <div class="card-header">
-        <div class="remove-btn" onclick="handleRemoveDino('${d.name}')" data-name="${d.name}">
+        <div class="remove-btn ${d.energy <= 0 ? "visible" : "" }" onclick="handleRemoveDino('${d.name}')" data-name="${d.name}">
           <i class="hgi hgi-stroke hgi-delete-02"></i>
         </div>
         <div class="card-img">
@@ -27,7 +28,10 @@ function render(dinos) {
         <h3 class="">Energy : ${d.energy}</h3>
         <h3 class="">Dangerousity Level : ${d.dangerLevel}</h3>
       </div>
-    </div>`;
+    </div>` : `<div class="empty">
+        <i class="hgi hgi-stroke hgi-covid-info"></i>
+        <p class="empty">Veuillez rajouter des dinosaures.</p>
+      </div>`;
   });
 }
 
@@ -66,6 +70,36 @@ async function handleAddDino() {
   };
 
   try {
+    // Récupérer la liste des espèces
+    const speciesResponse = await getSpecies();
+    const species = await speciesResponse.json();
+    
+    // Créer une liste d'options
+    const speciesList = Object.keys(species).sort();
+    const speciesOptions = speciesList.map((s, i) => `${i + 1}. ${s} (Danger: ${species[s]})`).join('\n');
+    
+    const choice = prompt(`Choisissez une espèce (entrez le numéro) :\n\n${speciesOptions}`);
+    
+    if (!choice) return;
+    
+    const index = parseInt(choice) - 1;
+    if (index < 0 || index >= speciesList.length) {
+      alert("Choix invalide !");
+      return;
+    }
+    
+    const espece = speciesList[index];
+    const name = prompt(`Nom du dinosaure (espèce: ${espece}) ?`);
+    
+    if (!name) return;
+    
+    const newDino = {
+      espece: espece,
+      name: name,
+      energy: 100,
+      hunger: 0
+    };
+    
     await addDino(newDino);
     refresh();
   } catch (error) {
