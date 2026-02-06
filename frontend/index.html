@@ -1,18 +1,29 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
-<head>
-  <title>DinoPark</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
-</head>
-<body>
-  <h1>DinoPark Monitor</h1>
-  <div class="btn-container">
-    <button class="btn"><i class="hgi hgi-stroke hgi-plus-sign"></i> Add</button>
-    <button class="btn"><i class="hgi hgi-stroke hgi-pizza-01"></i> Feed All</button>
-  </div>
-<div id="dinos"></div>
-<script src="api.js"></script>
-<script src="app.js"></script>
-</body>
+  <head>
+    <title>DinoPark</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <link rel="shortcut icon" href="images/OIP-1223847653.jpeg" type="image/x-icon">
+    <link
+      rel="stylesheet"
+      href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css"
+    />
+  </head>
+  <body>
+    <main class="presentation">
+      <h1>DinoPark Monitor</h1>
+      <div class="btn-container">
+        <button class="btn">
+          <i class="hgi hgi-stroke hgi-plus-sign"></i> Add
+        </button>
+        <button class="btn">
+          <i class="hgi hgi-stroke hgi-pizza-01"></i> Feed All
+        </button>
+      </div>
+      <div class="card-container" id="dinos"></div>
+    </main>
+    <script src="api.js"></script>
+    <script src="app.js"></script>
+  </body>
 </html>

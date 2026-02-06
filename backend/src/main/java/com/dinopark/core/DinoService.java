@@ -1,5 +1,7 @@
 package com.dinopark.core;
 
+import java.util.Objects;
+
 public class DinoService {
 
     public DinoService() {
@@ -15,12 +17,20 @@ public class DinoService {
 
     public void feedAll() {
         for (Dinosaur d : Park.dinosaurs) {
-            if(d.isAlive() && d.energy < 100){
+            if (d.isAlive() && d.energy < 100) {
                 d.hunger -= 10;
                 d.energy += 5;
                 d.hunger = d.hunger < 0 ? 0 : d.hunger;
                 d.energy = d.energy > 100 ? 100 : d.energy;
-            } 
+            }
         }
     }
+
+    public void remove(String name) {
+        Park.dinosaurs = Park.dinosaurs
+                .stream()
+                .filter(e -> !Objects.equals(e.name, name))
+                .toList();
+    }
+
 }
