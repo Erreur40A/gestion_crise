@@ -60,8 +60,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 : 'medium';
 
             card.innerHTML = `
-                <div class="dino-name">🦖 ${dino.name}</div>
-                <div class="species">🧬 Species: ${dino.species}</div>
+                <div class="dino-name"><img src="images/${dino.espece}.jpeg" alt="${dino.name} Picture" /> ${dino.name}</div>
+                <div class="species">🧬 Species: ${dino.espece}</div>
                 <div class="energy">⚡ Energy: ${dino.energy}</div>
                 <div class="danger ${dangerClass}">
                     ☠️ Danger: ${dino.dangerCategory ?? 'MEDIUM'} (${dino.dangerLevel}/10)
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // LOAD / REFRESH
     // ======================
 
-    function loadDinos() {
+    function load() {
         getDinos()
             .then(dinos => {
                 console.log('✅ Dinos loaded:', dinos);

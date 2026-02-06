@@ -35,6 +35,11 @@ h1 {
     font-weight: bold;
 }
 
+.dino-name img{
+    height: 24px;
+    width: 24px;
+}
+
 .energy {
     margin-top: 10px;
 }
