@@ -18,8 +18,9 @@ public class DinoService {
             if(d.isAlive() && d.energy < 100){
                 d.hunger -= 10;
                 d.energy += 5;
+                d.hunger = d.hunger < 0 ? 0 : d.hunger;
                 d.energy = d.energy > 100 ? 100 : d.energy;
-            }
+            } 
         }
     }
 }

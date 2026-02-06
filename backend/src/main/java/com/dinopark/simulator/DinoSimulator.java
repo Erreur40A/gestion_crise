@@ -12,10 +12,12 @@ public class DinoSimulator extends Thread {
                 if(d.isAlive()){
                     d.hunger += 5;
                     d.energy -= 3;
+                } else {
+                    d.energy = 0;
                 }
             }
             try {
-                Thread.sleep(5000);
+                Thread.sleep(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
