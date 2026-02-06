@@ -13,8 +13,7 @@ function render(dinos) {
   dinos.forEach((d, idx) => {
     const choice = Math.floor((Math.random()*images.length) % images.length); 
     // const choice = idx;
-
-    div.innerHTML += (dinos.length !== 0) ? `<div class="card shake ${d.energy <= 0 ? "disabled" : ""}">
+    div.innerHTML += `<div class="card shake ${d.energy <= 0 ? "disabled" : ""}">
       <div class="card-header">
         <div class="remove-btn ${d.energy <= 0 ? "visible" : "" }" onclick="handleRemoveDino('${d.name}')" data-name="${d.name}">
           <i class="hgi hgi-stroke hgi-delete-02"></i>
@@ -28,11 +27,15 @@ function render(dinos) {
         <h3 class="">Energy : ${d.energy}</h3>
         <h3 class="">Dangerousity Level : ${d.dangerLevel}</h3>
       </div>
-    </div>` : `<div class="empty">
+    </div>`;
+  });
+
+  if (dinos.length === 0) {
+      div.innerHTML += `<div class="empty">
         <i class="hgi hgi-stroke hgi-covid-info"></i>
         <p class="empty">Veuillez rajouter des dinosaures.</p>
-      </div>`;
-  });
+      </div>`
+    }
 }
 
 const observer = new IntersectionObserver(
@@ -59,14 +62,12 @@ function refresh() {
 }
 
 async function handleAddDino() {
-  const name = prompt("Nom du dinosaure ?");
-  if (!name) return;
 
   const newDino = {
-    name: name,
+    name: "",
     energy: 100,
     hunger: 0,
-    dangerLevel: parseInt(prompt("Dangerosité du dinosaure ?")),
+    dangerLevel: 0,
   };
 
   try {
@@ -121,6 +122,16 @@ async function handleRemoveDino(name) {
   }
 }
 
+async function handleRemoveAll() {
+
+  try {
+    await removeAllDino();
+    refresh();
+  } catch (error) {
+    console.error("Erreur de suppression de tous les dinos:", error);
+  }
+}
+
 async function handleFeedAll() {
   try {
     await feedDinos();
@@ -139,8 +150,10 @@ window.addEventListener("DOMContentLoaded", () => {
     btn.addEventListener("click", () => {
       if (index === 0) {
         handleAddDino();
-      } else {
+      } else if( index === 1) {
         handleFeedAll();
+      } else{
+        handleRemoveAll();
       }
     });
   });

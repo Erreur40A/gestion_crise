@@ -26,6 +26,12 @@ function removeDino(dinoData) {
   });
 }
 
+function removeAllDino() {
+  return fetch('http://localhost:8080/api/dinos/removeAll', {
+    method: 'POST',
+  });
+}
+
 function feedDinos() {
   return fetch('http://localhost:8080/api/dinos/feed', {
     method: 'POST'
