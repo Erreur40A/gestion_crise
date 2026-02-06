@@ -1,5 +1,6 @@
 package com.dinopark.core;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class DinoService {
@@ -50,5 +51,9 @@ public class DinoService {
         d.hunger = 0;
         d.dangerLevel = dangerLevel;
         Park.dinosaurs.add(d);
+    }
+
+    public void remove(String name) {
+        Park.dinosaurs= Park.dinosaurs.stream().filter(e -> !Objects.equals(e.name, name)).toList();
     }
 }

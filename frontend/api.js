@@ -7,12 +7,28 @@ function getSpecies() {
 }
 
 function addDino(dinoData) {
-  return fetch('http://localhost:8080/api/dinos/add', {
+  return fetch('http://localhost:8080/api/dinos', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(dinoData)
+  });
+}
+
+function removeDino(dinoData) {
+  return fetch('http://localhost:8080/api/dinos/remove', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dinoData)
+  });
+}
+
+function removeAllDino() {
+  return fetch('http://localhost:8080/api/dinos/removeAll', {
+    method: 'POST',
   });
 }
 

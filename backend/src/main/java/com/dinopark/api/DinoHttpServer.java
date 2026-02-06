@@ -7,6 +7,13 @@ import com.sun.net.httpserver.HttpServer;
 import java.io.InputStream;
 import java.net.InetSocketAddress;
 import java.util.Map;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.InetSocketAddress;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class DinoHttpServer {
 
@@ -61,6 +68,59 @@ public class DinoHttpServer {
             exchange.sendResponseHeaders(200, response.getBytes().length);
             exchange.getResponseBody().write(response.getBytes());
             exchange.getResponseBody().close();
+        });
+
+        // POST - Retirer un dino
+        server.createContext("/api/dinos/remove", exchange -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+
+            if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+            if (exchange.getRequestMethod().equalsIgnoreCase("POST")) {
+                InputStream is = exchange.getRequestBody();
+
+                Map<String, String> body = mapper.readValue(is, Map.class);
+                String name = body.get("name");
+                service.remove(name);
+
+                System.out.println("Le dinosaure mort a été supprimé : " + name);
+                String response = mapper.writeValueAsString(Park.dinosaurs);
+
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+                exchange.getResponseBody().write(response.getBytes());
+                exchange.getResponseBody().close();
+            }
+        });
+
+        // POST - Retirer tous les dinos
+        server.createContext("/api/dinos/removeAll", exchange -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+
+            if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
+                exchange.sendResponseHeaders(204, -1);
+                return;
+            }
+
+            if (exchange.getRequestMethod().equalsIgnoreCase("POST")) {
+
+                Park.dinosaurs.removeIf(dino -> !dino.isAlive());
+
+                System.out.println("Tous les dinos morts ont été supprimés");
+                String response = mapper.writeValueAsString(Park.dinosaurs);
+
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+                exchange.getResponseBody().write(response.getBytes());
+                exchange.getResponseBody().close();
+            }
         });
 
         server.start();
