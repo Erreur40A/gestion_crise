@@ -44,12 +44,13 @@ public class DinoService {
         }
     }
 
-    public void addDinosaur(String name, int energy, int dangerLevel) {
+    public void addDinosaur(String name, int energy, int dangerLevel, String espece) {
         Dinosaur d = new Dinosaur();
         d.name = name;
         d.energy = energy;
         d.hunger = 0;
         d.dangerLevel = dangerLevel;
+        d.espece = espece;
         Park.dinosaurs.add(d);
     }
 

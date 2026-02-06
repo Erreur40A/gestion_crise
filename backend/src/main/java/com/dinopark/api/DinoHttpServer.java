@@ -43,8 +43,9 @@ public class DinoHttpServer {
                 String name = (String) data.get("name");
                 int energy = (int) data.getOrDefault("energy", 100);
                 int dangerLevel = (int) data.getOrDefault("dangerLevel", 5);
+                String espece = (String) data.getOrDefault("espece", "unknown");
 
-                service.addDinosaur(name, energy, dangerLevel);
+                service.addDinosaur(name, energy, dangerLevel, espece);
 
                 String response = "Dino " + name + " has been added!";
                 exchange.sendResponseHeaders(201, response.getBytes().length); // 201 Created
