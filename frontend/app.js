@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    const API_BASE = 'http://localhost:8080/api';
+    const API_BASE = 'https://web-3.local.test/api';
 
 
     // API CALLS
