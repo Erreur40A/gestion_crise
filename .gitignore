@@ -1,5 +1,7 @@
 *.class
 .DS_Store
 backend/target/
+.metals
+.vscode
 **/.idea/
 .vscode

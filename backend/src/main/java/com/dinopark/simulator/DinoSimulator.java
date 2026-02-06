@@ -7,12 +7,13 @@ public class DinoSimulator extends Thread {
     public void run() {
         while (true) {
             for (Dinosaur d : Park.dinosaurs) {
-                if (!d.isAlive()) {
-                    continue;
+                if(d.isAlive()){
+                    d.hunger += 5;
+                    d.hunger = d.hunger >= 100 ? 100 : d.hunger;
+                    d.energy -= d.hunger == 100 ? 7 : 3;
+                } else {
+                    d.energy = 0;
                 }
-
-                d.adjustHunger(6);
-                d.adjustEnergy(-3);
             }
             try {
                 Thread.sleep(5000);
