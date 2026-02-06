@@ -7,7 +7,7 @@ public class Dinosaur {
     public int hunger;
     public int dangerLevel;
 
-    private static final int maxEnergy = 300;
+    private static final int maxEnergy = 100;
 
     public boolean isAlive() {
         return energy > 0;
