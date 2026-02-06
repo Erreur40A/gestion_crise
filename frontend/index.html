@@ -13,8 +13,21 @@
 
     <form id="addDinoForm">
         <input id="dinoName" type="text" placeholder="Dino name" required />
-        <input id="dinoEnergy" type="number" placeholder="Energy (default 100)" min="0" max="100" />
+        <input id="dinoEnergy" type="number" placeholder="Energy (default 100)" min="0" max="300" />
         <input id="dinoDanger" type="number" placeholder="Danger (default 5)" min="0" max="10" />
+        <select id="dinoSpecies" required>
+            <option value="">Select species</option>
+            <option value="STEGOSAURUS">Stegosaurus</option>
+            <option value="VELOCIRAPTOR">Velociraptor</option>
+            <option value="SPINOSAURUS">Spinosaurus</option>
+            <option value="ALLOSAURUS">Allosaurus</option>
+            <option value="CARNOTAURUS">Carnotaurus</option>
+            <option value="DILOPHOSAURUS">Dilophosaurus</option>
+            <option value="COMPSOGNATHUS">Compsognathus</option>
+            <option value="DIPLODOCUS">Diplodocus</option>
+            <option value="PARASAUROLOPHUS">Parasaurolophus</option>
+        </select>
+
         <button type="submit">➕ Add</button>
     </form>
 </div>
