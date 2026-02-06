@@ -17,10 +17,6 @@ public class DinoHttpServer {
         ObjectMapper mapper = new ObjectMapper();
 
         server.createContext("/api/dinos", exchange -> {
-            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-            exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
-
             // -------- Preflight (IMPORTANT) --------
             if (exchange.getRequestMethod().equalsIgnoreCase("OPTIONS")) {
                 exchange.sendResponseHeaders(204, -1);
