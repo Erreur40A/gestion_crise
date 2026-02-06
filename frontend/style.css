@@ -85,3 +85,30 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 10px;
 }
+
+#status {
+    max-width: 900px;
+    margin: 10px auto 20px auto;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-weight: 600;
+    display: none;
+}
+
+#status.success {
+    background: #e8f7ec;
+    color: #1f7a3a;
+    border: 1px solid #c9ead4;
+}
+
+#status.error {
+    background: #fdecec;
+    color: #b3261e;
+    border: 1px solid #f7c9c5;
+}
+
+#status.info {
+    background: #eef4ff;
+    color: #1f4fa3;
+    border: 1px solid #d6e2ff;
+}

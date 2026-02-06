@@ -1,6 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     const API_BASE = 'http://localhost:8080/api';
+    const statusEl = document.getElementById('status');
+    let statusTimer = null;
+
+    function setStatus(type, message, timeoutMs = 3000) {
+        if (!statusEl) return;
+        statusEl.className = type;
+        statusEl.textContent = message;
+        statusEl.style.display = 'block';
+        if (statusTimer) {
+            clearTimeout(statusTimer);
+        }
+        if (timeoutMs) {
+            statusTimer = setTimeout(() => {
+                statusEl.style.display = 'none';
+            }, timeoutMs);
+        }
+    }
 
 
     // API CALLS
@@ -84,11 +101,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function loadDinos() {
         getDinos()
             .then(dinos => {
-                console.log('✅ Dinos loaded:', dinos);
                 render(dinos);
             })
             .catch(error => {
                 console.error('❌ API error:', error);
+                setStatus('error', 'Impossible de charger les dinosaures.');
             });
     }
 
@@ -105,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const dangerValue = document.getElementById('dinoDanger').value;
 
         if (!name) {
-            alert('Dino name is required');
+            setStatus('error', 'Le nom du dinosaure est requis.');
             return;
         }
 
@@ -117,11 +134,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
         addDino(newDino)
             .then(() => {
-                console.log(' Dino added');
                 form.reset();
+                setStatus('success', 'Dinosaure ajouté.');
                 loadDinos();
             })
-            .catch(err => console.error(' Add dino error:', err));
+            .catch(err => {
+                console.error(' Add dino error:', err);
+                setStatus('error', 'Erreur lors de l’ajout du dinosaure.');
+            });
     });
 
     // Feed All
@@ -130,10 +150,13 @@ document.addEventListener('DOMContentLoaded', () => {
     feedBtn.addEventListener('click', () => {
         feedAll()
             .then(() => {
-                console.log(' All dinos fed');
+                setStatus('success', 'Tous les dinosaures ont été nourris.');
                 loadDinos();
             })
-            .catch(err => console.error('❌ Feed error:', err));
+            .catch(err => {
+                console.error('❌ Feed error:', err);
+                setStatus('error', 'Erreur pendant le nourrissage.');
+            });
     });
 
     // ======================
