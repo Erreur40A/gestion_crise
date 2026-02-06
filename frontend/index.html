@@ -1,12 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-  <title>DinoPark</title>
+    <meta charset="UTF-8">
+    <title>DinoPark Monitor</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>DinoPark Monitor</h1>
-<div id="dinos"></div>
-<script src="api.js"></script>
+
+<h1>🦖 DinoPark Monitor</h1>
+<div class="actions">
+    <button id="feedAllBtn" type="button">🍖 Feed all</button>
+
+    <form id="addDinoForm">
+        <input id="dinoName" type="text" placeholder="Dino name" required />
+        <input id="dinoEnergy" type="number" placeholder="Energy (default 100)" min="0" max="100" />
+        <input id="dinoDanger" type="number" placeholder="Danger (default 5)" min="0" max="10" />
+        <button type="submit">➕ Add</button>
+    </form>
+</div>
+<div id="dino-container"></div>
+
 <script src="app.js"></script>
 </body>
 </html>

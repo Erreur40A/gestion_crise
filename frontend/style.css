@@ -1,0 +1,87 @@
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background: #f4f6f8;
+    margin: 0;
+    padding: 40px;
+    text-align: center;
+}
+
+h1 {
+    margin-bottom: 40px;
+}
+
+#dino-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.dino-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
+}
+
+.dino-card:hover {
+    transform: translateY(-5px);
+}
+
+.dino-name {
+    font-size: 1.4em;
+    font-weight: bold;
+}
+
+.energy {
+    margin-top: 10px;
+}
+
+.danger {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* Couleurs selon le danger */
+.low {
+    color: green;
+}
+
+.medium {
+    color: orange;
+}
+
+.high {
+    color: red;
+}
+.actions {
+    max-width: 900px;
+    margin: 0 auto 20px auto;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.actions button {
+    padding: 10px 14px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+#addDinoForm {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+#addDinoForm input {
+    padding: 10px 12px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
