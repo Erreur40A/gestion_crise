@@ -11,6 +11,10 @@ public class DinoHttpServer {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         server.createContext("/api/dinos", exchange -> {
+                        // Headers CORS AVANT tout
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+            
             ObjectMapper mapper = new ObjectMapper();
             String response = mapper.writeValueAsString(Park.dinosaurs);
 
