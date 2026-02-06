@@ -13,7 +13,5 @@ public class Main {
 
         DinoSimulator simulator = new DinoSimulator();
         simulator.start();
-
-        System.out.println("Serveur lancer");
     }
 }

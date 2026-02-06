@@ -5,8 +5,6 @@ import com.dinopark.core.*;
 public class DinoSimulator extends Thread {
 
     public void run() {
-        DinoService service = new DinoService();
-
         while (true) {
             for (Dinosaur d : Park.dinosaurs) {
                 if(d.isAlive()){

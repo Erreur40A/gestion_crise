@@ -3,7 +3,8 @@ package com.dinopark.core;
 import java.util.Random;
 
 public class DinoService {
-    
+    public static final int HungerAdjustment = -100;
+    public static final int EnergyAdjustment = 50;    
     private Random random = new Random();
     private String[] noms = {
         "Rex", "Blue", "Delta", "Charlie", "Echo", "Rexy", "Buck", "Doe",
@@ -37,8 +38,17 @@ public class DinoService {
 
     public void feedAll() {
         for (Dinosaur d : Park.dinosaurs) {
-            d.hunger = Math.max(0, d.hunger - 20); // La faim ne peut pas être négative
-            d.energy = Math.min(100, d.energy + 10); // L'énergie max est 100
+            d.adjustHunger(HungerAdjustment);
+            d.adjustEnergy(EnergyAdjustment);
         }
+    }
+
+    public void addDinosaur(String name, int energy, int dangerLevel) {
+        Dinosaur d = new Dinosaur();
+        d.name = name;
+        d.energy = energy;
+        d.hunger = 0;
+        d.dangerLevel = dangerLevel;
+        Park.dinosaurs.add(d);
     }
 }
