@@ -1,7 +1,8 @@
 package com.dinopark.core;
 
 public class DinoService {
-
+    public static final int HungerAdjustment = -100;
+    public static final int EnergyAdjustment = 50;
     public DinoService() {
         if (Park.dinosaurs.isEmpty()) {
             addDinosaur("Rex", 100, 5);
@@ -10,8 +11,8 @@ public class DinoService {
 
     public void feedAll() {
         for (Dinosaur d : Park.dinosaurs) {
-            d.adjustHunger(-100);
-            d.adjustEnergy(50);
+            d.adjustHunger(HungerAdjustment);
+            d.adjustEnergy(EnergyAdjustment);
         }
     }
 
