@@ -1,13 +1,13 @@
 function getDinos() {
-  return fetch('http://localhost:8080/api/dinos');
+  return fetch(`${API_BASE}/api/dinos`);
 }
 
 function getSpecies() {
-  return fetch('http://localhost:8080/api/species');
+  return fetch(`${API_BASE}/api/species`);
 }
 
 function addDino(dinoData) {
-  return fetch('http://localhost:8080/api/dinos', {
+  return fetch(`${API_BASE}/api/dinos`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -17,7 +17,7 @@ function addDino(dinoData) {
 }
 
 function removeDino(dinoData) {
-  return fetch('http://localhost:8080/api/dinos/remove', {
+  return fetch(`${API_BASE}/api/dinos/remove`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -27,13 +27,13 @@ function removeDino(dinoData) {
 }
 
 function removeAllDino() {
-  return fetch('http://localhost:8080/api/dinos/removeAll', {
+  return fetch(`${API_BASE}/api/dinos/removeAll`, {
     method: 'POST',
   });
 }
 
 function feedDinos() {
-  return fetch('http://localhost:8080/api/dinos/feed', {
+  return fetch(`${API_BASE}/api/dinos/feed`, {
     method: 'POST'
   });
 }
