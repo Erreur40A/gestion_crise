@@ -18,13 +18,11 @@ public class DinoHttpServer {
         
         // GET - Liste des dinos
         server.createContext("/api/dinos", exchange -> {
-            // Headers CORS
             exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
             exchange.getResponseHeaders().add("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
             exchange.getResponseHeaders().add("Access-Control-Allow-Headers", "Content-Type");
             exchange.getResponseHeaders().add("Content-Type", "application/json");
 
-            // Gérer OPTIONS (preflight)
             if (exchange.getRequestMethod().equals("OPTIONS")) {
                 exchange.sendResponseHeaders(204, -1);
                 return;
@@ -32,6 +30,19 @@ public class DinoHttpServer {
 
             ObjectMapper mapper = new ObjectMapper();
             String response = mapper.writeValueAsString(Park.dinosaurs);
+
+            exchange.sendResponseHeaders(200, response.getBytes().length);
+            exchange.getResponseBody().write(response.getBytes());
+            exchange.getResponseBody().close();
+        });
+        
+        // GET - Liste des espèces disponibles
+        server.createContext("/api/species", exchange -> {
+            exchange.getResponseHeaders().add("Access-Control-Allow-Origin", "*");
+            exchange.getResponseHeaders().add("Content-Type", "application/json");
+
+            ObjectMapper mapper = new ObjectMapper();
+            String response = mapper.writeValueAsString(DinoSpecies.SPECIES);
 
             exchange.sendResponseHeaders(200, response.getBytes().length);
             exchange.getResponseBody().write(response.getBytes());
@@ -51,15 +62,18 @@ public class DinoHttpServer {
             }
             
             if (exchange.getRequestMethod().equals("POST")) {
-                // Lire le body
                 BufferedReader reader = new BufferedReader(new InputStreamReader(exchange.getRequestBody()));
                 String body = reader.lines().collect(Collectors.joining());
                 
                 ObjectMapper mapper = new ObjectMapper();
                 Dinosaur newDino = mapper.readValue(body, Dinosaur.class);
+                
+                // Récupérer le niveau de danger basé sur l'espèce
+                newDino.dangerLevel = DinoSpecies.getDangerLevel(newDino.espece);
+                
                 Park.dinosaurs.add(newDino);
                 
-                System.out.println("✅ Nouveau dino ajouté : " + newDino.name);
+                System.out.println("✅ Nouveau dino ajouté : " + newDino.name + " (" + newDino.espece + ")");
                 
                 String response = mapper.writeValueAsString(newDino);
                 exchange.sendResponseHeaders(201, response.getBytes().length);

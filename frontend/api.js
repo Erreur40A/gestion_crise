@@ -2,6 +2,10 @@ function getDinos() {
   return fetch('http://localhost:8080/api/dinos');
 }
 
+function getSpecies() {
+  return fetch('http://localhost:8080/api/species');
+}
+
 function addDino(dinoData) {
   return fetch('http://localhost:8080/api/dinos/add', {
     method: 'POST',
