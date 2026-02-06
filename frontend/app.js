@@ -2,7 +2,7 @@ function render(dinos) {
   const div = document.getElementById('dinos');
   div.innerHTML = '';
   dinos.forEach(d => {
-    div.innerHTML += `<p class="${d.energy > 0 ? "" : "disabled"}">${d.name} - Energy: ${d.energy} - Hunger: ${d.hunger} - Danger: ${d.dangerLevel}</p>`;
+    div.innerHTML += `<p> <span class="${d.energy > 0 ? "" : "disabled"}">${d.name} - Energy: ${d.energy} - Hunger: ${d.hunger} - Danger: ${d.dangerLevel}</span> <span class="status">${d.hunger == 100 && d.energy > 0 ? "This dinosaur is very hungry !" : d.energy <= 0 ? "This dinosaur is dead.." : ""}</span></p>`;
   });
 }
 function refresh() {

@@ -11,13 +11,14 @@ public class DinoSimulator extends Thread {
             for (Dinosaur d : Park.dinosaurs) {
                 if(d.isAlive()){
                     d.hunger += 5;
-                    d.energy -= 3;
+                    d.hunger = d.hunger >= 100 ? 100 : d.hunger;
+                    d.energy -= d.hunger == 100 ? 7 : 3;
                 } else {
                     d.energy = 0;
                 }
             }
             try {
-                Thread.sleep(500);
+                Thread.sleep(5000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
