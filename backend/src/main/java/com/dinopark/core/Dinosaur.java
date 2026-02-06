@@ -6,6 +6,8 @@ public class Dinosaur {
     public int hunger;
     public int dangerLevel;
 
+    private static final int maxEnergy = 300;
+
     public boolean isAlive() {
         return energy > 0;
     }
@@ -14,6 +16,9 @@ public class Dinosaur {
         energy += delta;
         if (energy < 0)  {
             energy = 0;
+        }
+        if (energy > maxEnergy)  {
+            energy = maxEnergy;
         }
     }
 

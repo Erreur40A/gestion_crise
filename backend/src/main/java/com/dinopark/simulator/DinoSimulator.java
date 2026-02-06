@@ -11,7 +11,7 @@ public class DinoSimulator extends Thread {
                     continue;
                 }
 
-                d.adjustHunger(5);
+                d.adjustHunger(6);
                 d.adjustEnergy(-3);
             }
             try {

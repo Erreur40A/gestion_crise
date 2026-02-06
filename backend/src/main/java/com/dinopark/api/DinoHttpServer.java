@@ -17,37 +17,35 @@ public class DinoHttpServer {
         ObjectMapper mapper = new ObjectMapper();
 
         server.createContext("/api/dinos", exchange -> {
-            String response = mapper.writeValueAsString(Park.dinosaurs);
-            exchange.sendResponseHeaders(200, response.length());
-            exchange.getResponseBody().write(response.getBytes());
+            String method = exchange.getRequestMethod();
+            if (method.equalsIgnoreCase("GET")) {
+                String response = mapper.writeValueAsString(Park.dinosaurs);
+                exchange.sendResponseHeaders(200, response.getBytes().length);
+                exchange.getResponseBody().write(response.getBytes());
+
+            } else if (method.equalsIgnoreCase("POST")) {
+                InputStream is = exchange.getRequestBody();
+                Map<String, Object> data = mapper.readValue(is, Map.class);
+
+                String name = (String) data.get("name");
+                int energy = (int) data.getOrDefault("energy", 100);
+                int dangerLevel = (int) data.getOrDefault("dangerLevel", 5);
+
+                service.addDinosaur(name, energy, dangerLevel);
+
+                String response = "Dino " + name + " has been added!";
+                exchange.sendResponseHeaders(201, response.getBytes().length); // 201 Created
+                exchange.getResponseBody().write(response.getBytes());
+
+            } else {
+                exchange.sendResponseHeaders(405, -1); // Method Not Allowed
+            }
             exchange.close();
         });
 
         server.createContext("/api/feed", exchange -> {
             service.feedAll();
             String response = "All dinos are fed!";
-            exchange.sendResponseHeaders(200, response.getBytes().length);
-            exchange.getResponseBody().write(response.getBytes());
-            exchange.close();
-        });
-
-        server.createContext("/api/dinos", exchange -> {
-            if (!exchange.getRequestMethod().equalsIgnoreCase("POST")) {
-                exchange.sendResponseHeaders(405, -1);
-                exchange.close();
-                return;
-            }
-
-            InputStream is = exchange.getRequestBody();
-            Map<String, Object> data = mapper.readValue(is, Map.class);
-
-            String name = (String) data.get("name");
-            int energy = (int) data.getOrDefault("energy", 100);
-            int dangerLevel = (int) data.getOrDefault("dangerLevel", 5);
-
-            service.addDinosaur(name, energy, dangerLevel);
-
-            String response = "Dino " + name + " has been added!";
             exchange.sendResponseHeaders(200, response.getBytes().length);
             exchange.getResponseBody().write(response.getBytes());
             exchange.close();

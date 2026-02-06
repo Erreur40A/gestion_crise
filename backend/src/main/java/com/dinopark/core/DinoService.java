@@ -10,8 +10,8 @@ public class DinoService {
 
     public void feedAll() {
         for (Dinosaur d : Park.dinosaurs) {
-            d.hunger -= 10;
-            d.energy += 5;
+            d.adjustHunger(-100);
+            d.adjustEnergy(50);
         }
     }
 
