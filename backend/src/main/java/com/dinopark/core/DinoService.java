@@ -15,8 +15,11 @@ public class DinoService {
 
     public void feedAll() {
         for (Dinosaur d : Park.dinosaurs) {
-            d.hunger -= 10;
-            d.energy += 5;
+            if(d.isAlive() && d.energy < 100){
+                d.hunger -= 10;
+                d.energy += 5;
+                d.energy = d.energy > 100 ? 100 : d.energy;
+            }
         }
     }
 }

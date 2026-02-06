@@ -7,6 +7,6 @@ public class Dinosaur {
     public int dangerLevel;
 
     public boolean isAlive() {
-        return energy < 0;
+        return energy > 0;
     }
 }

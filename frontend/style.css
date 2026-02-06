@@ -34,3 +34,9 @@
     border-color: var(--btn-color);
 
 }
+
+.disabled{
+    text-decoration: line-through;
+    cursor: not-allowed;
+    color: rgba(255, 0, 0, 1);
+}

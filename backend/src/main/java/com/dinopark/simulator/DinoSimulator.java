@@ -9,8 +9,10 @@ public class DinoSimulator extends Thread {
 
         while (true) {
             for (Dinosaur d : Park.dinosaurs) {
-                d.hunger += 5;
-                d.energy -= 3;
+                if(d.isAlive()){
+                    d.hunger += 5;
+                    d.energy -= 3;
+                }
             }
             try {
                 Thread.sleep(5000);
