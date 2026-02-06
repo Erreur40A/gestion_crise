@@ -4,12 +4,7 @@ public class DinoService {
 
     public DinoService() {
         if (Park.dinosaurs.isEmpty()) {
-            Dinosaur d = new Dinosaur();
-            d.name = "Rex";
-            d.energy = 100;
-            d.hunger = 0;
-            d.dangerLevel = 5;
-            Park.dinosaurs.add(d);
+            addDinosaur("Rex", 100, 5);
         }
     }
 
@@ -18,5 +13,14 @@ public class DinoService {
             d.hunger -= 10;
             d.energy += 5;
         }
+    }
+
+    public void addDinosaur(String name, int energy, int dangerLevel) {
+        Dinosaur d = new Dinosaur();
+        d.name = name;
+        d.energy = energy;
+        d.hunger = 0;
+        d.dangerLevel = dangerLevel;
+        Park.dinosaurs.add(d);
     }
 }

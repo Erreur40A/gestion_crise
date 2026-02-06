@@ -5,12 +5,14 @@ import com.dinopark.core.*;
 public class DinoSimulator extends Thread {
 
     public void run() {
-        DinoService service = new DinoService();
-
         while (true) {
             for (Dinosaur d : Park.dinosaurs) {
-                d.hunger += 5;
-                d.energy -= 3;
+                if (!d.isAlive()) {
+                    continue;
+                }
+
+                d.adjustHunger(5);
+                d.adjustEnergy(-3);
             }
             try {
                 Thread.sleep(5000);

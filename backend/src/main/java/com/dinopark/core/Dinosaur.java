@@ -7,6 +7,20 @@ public class Dinosaur {
     public int dangerLevel;
 
     public boolean isAlive() {
-        return energy < 0;
+        return energy > 0;
+    }
+
+    public void adjustEnergy(int delta) {
+        energy += delta;
+        if (energy < 0)  {
+            energy = 0;
+        }
+    }
+
+    public void adjustHunger(int delta) {
+        hunger += delta;
+        if (hunger < 0)  {
+            hunger = 0;
+        }
     }
 }
