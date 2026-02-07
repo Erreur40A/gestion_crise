@@ -90,3 +90,20 @@ h1 {
     border: 1px solid #ddd;
     border-radius: 10px;
 }
+
+div.trash,
+div.remove,
+div.delete{
+    padding: 4px 10px;
+    cursor:pointer;
+    background-color: red;
+    color: white;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.delete-btn-container{
+    margin: 1rem 0;
+    background-color: white;
+    color: red;
+}

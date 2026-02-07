@@ -57,4 +57,8 @@ public class DinoService {
     public void remove(String name) {
         Park.dinosaurs= Park.dinosaurs.stream().filter(e -> !Objects.equals(e.name, name)).toList();
     }
+
+    public void removeAll(){
+        Park.dinosaurs = Park.dinosaurs.stream().filter(e -> e.isAlive()).toList();
+    }
 }

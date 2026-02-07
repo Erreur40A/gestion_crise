@@ -17,7 +17,7 @@ class DinoServiceTest {
     @Test
     void testAddDinosaur() {
         int initialSize = Park.dinosaurs.size();
-        service.addDinosaur("Triceratops", 80, 3);
+        service.addDinosaur("Triceratops", 80, 3, "Triceratops");
 
         assertEquals(initialSize + 1, Park.dinosaurs.size());
 
